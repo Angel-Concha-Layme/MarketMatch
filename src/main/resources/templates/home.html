@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    
+</head>
+<body>
+    <div th:insert="~{base :: navheader}"></div>
+
+
+    <div class="contenedor">
+        <div th:each="pedido: ${pedidos}">
+            <div class="card">
+                <div class="card-image" th:style="'background-image: url(' + ${pedido.urlImagen} + ')'"></div>
+                
+                <h2 class="card-title" th:text="${pedido.nombre}"></h2>
+                
+                <div class="card-content">
+                    <p class="card-price">Valor: <span th:text="${pedido.precio}"></span></p>
+                    <p class="card-delivery">Fecha de entrega: <span th:text="${pedido.fechaEntrega}"></span></p>
+                    <a class="card-url" th:href="${pedido.urlProducto}" target="_blank">Ver Producto</a>
+                    <div class="card-description">
+                        <label for="descripcion">Descripción:</label>
+                        <p th:text="${pedido.descripcion}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

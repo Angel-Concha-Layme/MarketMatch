@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">Nuevo Pedido</h2>
+        <form action="/pedido/nuevo" method="POST">
+            <label for="producto">Producto</label>
+            <input type="text" id="producto" name="nombre" placeholder="Nombre del producto" required>
+
+            <label for="url">URL del producto</label>
+            <input type="url" id="url" name="urlProducto" placeholder="URL del producto" required>
+
+            <label for="imagen">URL de la imagen</label>
+            <input type="url" id="imagen" name="urlImagen" placeholder="URL de la imagen" required>
+
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="4" placeholder="Detalles del producto" required></textarea>
+
+            <input type="submit" value="Registrar" class="btn-submit">
+        </form>
+    </div>
+</body>
+</html>
+
+
+</html>

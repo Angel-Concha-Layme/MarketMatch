@@ -1,0 +1,8 @@
+<div th:fragment="navheader">
+    <header class="navheader">
+        <h1 class="logo">MarketMatch</h1>
+        <a href="/login" sec:authorize="!isAuthenticated()" class="login-link">Iniciar sesión</a>
+        <a onClick="document.querySelector('#logout-form').submit();" href="#" sec:authorize="isAuthenticated()" class="login-link">Cerrar sesión</a>
+        <form class="hidden-form" id="logout-form" th:action ="@{/logout}"  method="post"></form>
+    </header>
+</div>
