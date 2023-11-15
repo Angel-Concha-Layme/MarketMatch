@@ -1,0 +1,67 @@
+
+:root{
+    --background: #242629;
+    --primary: #61dafb; 
+    --card-background: #16161a;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color:  var(--background);
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+    
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+
+input[type="text"], input[type="url"], textarea {
+    width: 100%;
+    max-width: 95%; 
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--primary);
+    font-size: 20px;
+    background-color: var(--card-background);
+    color: #ffffff;
+}
+
+.btn-submit {
+    display: block;
+    
+    padding: 10px;
+    background-color: var(--primary);
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-submit:hover {
+    background-color: #007BFF;
+}
