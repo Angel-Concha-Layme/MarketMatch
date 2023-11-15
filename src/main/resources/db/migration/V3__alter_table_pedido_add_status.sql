@@ -1,0 +1,1 @@
+ALTER TABLE pedidos_custom ADD status VARCHAR(30) DEFAULT 'ESPERANDO';
