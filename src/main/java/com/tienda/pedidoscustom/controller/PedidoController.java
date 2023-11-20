@@ -31,6 +31,7 @@ public class PedidoController {
     public String nuevoPedido(PedidoFumulario pedidoFumulario) {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        
 
         Usuario usuario = UsuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("No se encontro el usuario"));
