@@ -2,10 +2,14 @@ package com.tienda.pedidoscustom.dominio.Pedido.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tienda.pedidoscustom.dominio.Oferta.model.Oferta;
 import com.tienda.pedidoscustom.dominio.Pedido.dto.PedidoFumulario;
 import com.tienda.pedidoscustom.dominio.Usuario.model.Usuario;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,6 +20,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,7 +58,14 @@ public class Pedido {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_username")
+    @JsonIgnore
     private Usuario usuario;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Oferta> ofertas;
+
 
     public Pedido(PedidoFumulario pedidoFumulario) {
         this.nombre = pedidoFumulario.nombre();
