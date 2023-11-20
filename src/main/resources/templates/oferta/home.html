@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    
+</head>
+<body >
+    
+    <div th:insert="~{base :: navheader}"></div>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/usuario/pedido">Mis pedidos</a>
+            <a href="/usuario/pedido/filtrar?status=esperando">Esperando</a>
+            <a href="/usuario/pedido/filtrar?status=aprobado">Aprobado</a>
+            <a href="/usuario/pedido/filtrar?status=entregado">Entregado</a>
+            
+        </div>
+        <div class="nav-options">
+            <a href="" >Hacer ofertas</a>
+            <a href="/pedido/formulario" >Nuevo pedido</a>            
+        </div>
+
+    </div>
+
+    
+    <div class="contenedor" id="ofertas" >
+        <div v-for="pedido in pedidos">
+            <div class="card">
+    
+                <div class="card-image" :style="'background-image: url(' + pedido.urlImagen + ')'"></div>
+                <h2 class="card-title">{{ pedido.nombre }} </h2>
+                
+                <div class="card-content">
+                    <div class="card-description">
+                        <label for="descripcion">Descripción:</label>
+                        <p>{{pedido.descripcion}}</p>
+                    </div>
+                    <p class="card-delivery">Fecha de entrega: <input type="date" v-model="pedido.fechaEntrega"></p>
+                    <p class="card-price">Precio: <input type="number" v-model="pedido.precio"></p> 
+                    
+                    <textarea class="card-offer" v-model="pedido.comentario" placeholder="Escribe un mensaje"></textarea>
+
+
+                    <a class="card-url"  @click="hacerOferta(pedido.id, pedido.precio, pedido.fechaEntrega, pedido.comentario)" href="#"  >Hacer oferta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function onLoad(){
+            const {createApp} = Vue;
+    
+            createApp({
+                data(){
+                    return{
+                        pedidos: []
+                    }
+                },
+                mounted() {
+                    fetch('http://localhost:8080/api/pedidos/esperando')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.pedidos = data.map(pedido => ({
+                            ...pedido,
+                            comentario: ''
+                        }));
+                    })
+                    .catch(error => console.error('Error:', error));
+                },
+                methods: {
+                    hacerOferta(id, precio, fechaEntrega, comentario) {
+                        fetch('http://localhost:8080/api/ofertas', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: id,
+                                precio: precio,
+                                fechaEntrega: fechaEntrega,
+                                comentario: comentario
+                            })
+                        })
+                        .then(response => response.text())  // Cambia esto
+                        .then(data => console.log(data))
+                        .catch(error => console.error('Error:', error));
+                    }
+                }
+            }).mount('#ofertas');
+        }
+        window.onload = onLoad;
+    </script>
+
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</body>
+
+</html>
