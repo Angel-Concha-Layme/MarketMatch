@@ -2,6 +2,8 @@ package com.tienda.pedidoscustom.dominio.Usuario.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tienda.pedidoscustom.dominio.Oferta.model.Oferta;
 import com.tienda.pedidoscustom.dominio.Pedido.model.Pedido;
 
 import jakarta.persistence.CascadeType;
@@ -29,6 +31,9 @@ public class Usuario {
     private boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY) // add
-    private List<Pedido> pedidos; // add
+    private List<Pedido> pedidos; 
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Oferta> ofertas;
 }
