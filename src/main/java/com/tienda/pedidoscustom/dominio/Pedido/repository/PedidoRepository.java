@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tienda.pedidoscustom.dominio.Pedido.model.Pedido;
 import com.tienda.pedidoscustom.dominio.Pedido.model.StatusPedido;
+import com.tienda.pedidoscustom.dominio.Usuario.model.Usuario;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
@@ -20,4 +21,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Cacheable("pedidos")
     List<Pedido> findByUsuarioUsernameAndStatus(String name, StatusPedido estado);
+
+    List<Pedido> findByStatusAndUsuarioNot(StatusPedido status, Usuario usuario);
+
 }
