@@ -1,6 +1,5 @@
 package com.tienda.pedidoscustom.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class HomeController {
     private PedidoService pedidoService;
 
     @GetMapping
-    public String home(Model model, Principal principal) {
+    public String home(Model model) {
         List<DetallesModelo> pedidoDTO = pedidoService.findByStatus(StatusPedido.ENTREGADO);
         model.addAttribute("pedidos", pedidoDTO);
         return "home";
